@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FixYouTube Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="../icons/48.png" alt="" width="28" height="28" />
+        <h1>FixYouTube</h1>
+        <p id="status" role="status" aria-live="polite"></p>
+      </header>
+
+      <form id="settings" autocomplete="off">
+        <section class="row">
+          <div class="text">
+            <label for="dislikeCount">Show Dislike Count</label>
+            <p>Restore the number of dislikes using <i>Return YouTube Dislike</i> data.</p>
+          </div>
+          <input type="checkbox" id="dislikeCount" name="dislikeCount" />
+        </section>
+
+        <section class="row">
+          <div class="text">
+            <label for="defaultSpeed">Automatically Select 2x Speed</label>
+            <p>Use 2x playback speed as the default for every video, except live streams.</p>
+          </div>
+          <input type="checkbox" id="defaultSpeed" name="defaultSpeed" />
+        </section>
+
+        <section class="row">
+          <div class="text">
+            <label for="autoQuality">Automatically Select Resolution</label>
+            <p>If a video isn't available at the selected resolution, the next highest one is used.</p>
+            <select id="quality" name="quality" aria-label="Resolution"></select>
+          </div>
+          <input type="checkbox" id="autoQuality" name="autoQuality" />
+        </section>
+
+        <section class="row">
+          <div class="text">
+            <label for="videosPerRow">Video Cards Per Row</label>
+            <p>Applies to the homepage, subscriptions, and channel pages.</p>
+            <select id="videosPerRowCount" name="videosPerRowCount" aria-label="Video cards per row"></select>
+          </div>
+          <input type="checkbox" id="videosPerRow" name="videosPerRow" />
+        </section>
+
+        <section class="row">
+          <div class="text">
+            <label for="regularFrameRate">Use Standard Frame Rates</label>
+            <p>Force videos to play at standard frame rates (24, 25, or 30fps) instead of high frame rates (48, 50, or 60fps). This will often result in the available resolutions being limited to 720p and below.</p>
+          </div>
+          <input type="checkbox" id="regularFrameRate" name="regularFrameRate" />
+        </section>
+      </form>
+    </main>
+
+    <script src="../shared/settings.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

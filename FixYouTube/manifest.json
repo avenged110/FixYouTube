@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "FixYouTube",
+  "description": "Dislike counts, a cleaner action row, 2x speed, automatic quality, theater mode, and no Shorts, autoplay, or overlays.",
+  "version": "1.0.0",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "FixYouTube",
+    "default_popup": "options/options.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["https://returnyoutubedislikeapi.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/*", "*://www.youtube-nocookie.com/*"],
+      "js": ["content/main.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://www.youtube.com/*", "*://www.youtube-nocookie.com/*"],
+      "js": ["shared/settings.js", "content/isolated.js"],
+      "css": ["content/youtube.css"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "ISOLATED"
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+/*
+ * FixYouTube: always-on styles for youtube.com and youtube-nocookie.com.
+ * (The videos-per-row grid is user-configurable and injected by isolated.js.)
+ */
+
+/* ==========================================================================
+   (B3) Autoplay, Stable Volume, Ambient mode, Voice boost: hide the controls
+   ========================================================================== */
+
+/* Player's autoplay switch (classic and modern players). */
+.html5-video-player button.ytp-autonav-toggle,
+.html5-video-player .ytp-autonav-toggle-button-container,
+.html5-video-player button[data-tooltip-target-id="ytp-autonav-toggle-button"] {
+  display: none !important;
+}
+
+/* Anything main.js flags: settings menu entries (Stable Volume, Ambient mode,
+   Voice boost, Autoplay, Subtitles, Sleep timer), playback speed presets other
+   than 1x/1.5x/1.75x/2x, sidebar sections, and "Add to queue" menu entries. */
+[data-fixyoutube-hidden],
+/* Stable Volume, also by class. */
+.ytp-settings-menu .ytp-drc-menu-item,
+/* Playback speed panel: the slider and its -/+ buttons. */
+.ytp-settings-menu .ytp-variable-speed-panel-slider-container,
+/* Fullscreen: the action bar above the controls (like, dislike, comments,
+   share, ask, more). */
+.html5-video-player .ytp-fullscreen-quick-actions {
+  display: none !important;
+}
+
+/* Kept speed presets YouTube hid for lack of room (there is room once two are gone). */
+.ytp-settings-menu .ytp-variable-speed-panel-preset-button-wrapper[data-fixyoutube-shown] {
+  display: flex !important;
+}
+
+/* The selected speed's button is filled (main.js keeps it current). */
+.ytp-settings-menu .ytp-variable-speed-panel-preset-button-wrapper[data-fixyoutube-selected] > button {
+  background: #fff !important;
+  color: #0f0f0f !important;
+}
+
+/* ==========================================================================
+   Player controls: "Playback speed" and "Quality" buttons replace the
+   settings button (main.js), opening their submenu directly
+   ========================================================================== */
+
+/* Hidden, not removed: main.js opens YouTube's menu through it. */
+.html5-video-player:has(.fixyoutube-control-button) .ytp-settings-button,
+/* The menu's main panel, the submenus' Back buttons, the large speed readout,
+   and the "Normal" label under 1x. */
+.ytp-settings-menu .ytp-popup-content > .ytp-panel:not(:has(> .ytp-panel-header)),
+.ytp-settings-menu .ytp-panel-back-button-container,
+.ytp-settings-menu .ytp-speed-display-container,
+.ytp-settings-menu .ytp-variable-speed-panel-preset-button-label-text {
+  display: none !important;
+}
+
+/* Open straight into the submenu, without the slide from the main panel. */
+.ytp-settings-menu,
+.ytp-settings-menu .ytp-panel {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* YouTube's own menu icons, centered like the settings button's cog. */
+.html5-video-player .fixyoutube-control-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: top;
+}
+
+/* The quality badge, styled from YouTube's own badge by main.js. */
+.html5-video-player .fixyoutube-quality-badge {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Centered menu titles and speed buttons. */
+.ytp-settings-menu .ytp-panel-header {
+  justify-content: center;
+}
+.ytp-settings-menu .ytp-panel-title {
+  flex: 1;
+  text-align: center;
+}
+.ytp-settings-menu .ytp-variable-speed-panel-chips {
+  justify-content: center;
+}
+
+/* Ambient mode glow. It is turned off at the preference level; this only
+   guarantees nothing is painted if YouTube ever re-enables it. The guard
+   ensures a container can never take the player down with it. */
+ytd-watch-flexy #cinematics:not(:has(.html5-video-player)),
+ytd-watch-flexy #cinematics-container:not(:has(.html5-video-player)),
+ytd-watch-flexy #cinematics-full-bleed-container:not(:has(.html5-video-player)),
+ytd-watch-grid #cinematics:not(:has(.html5-video-player)) {
+  display: none !important;
+}
+
+/* ==========================================================================
+   (B5) Info cards and end screens
+   ========================================================================== */
+
+.html5-video-player .ytp-ce-element,
+.html5-video-player .ytp-ce-covering-overlay,
+.html5-video-player .ytp-ce-element-shadow,
+.html5-video-player .ytp-iv-player-content,
+.html5-video-player .ytp-iv-video-content,
+.html5-video-player .ytp-cards-button,
+.html5-video-player .ytp-cards-teaser,
+.html5-video-player .iv-drawer,
+.html5-video-player .html5-endscreen,
+.html5-video-player .ytp-endscreen-content,
+.html5-video-player.ended-mode .ytp-fullscreen-grid {
+  display: none !important;
+}
+
+/* ==========================================================================
+   (B6) Live chat
+   ========================================================================== */
+
+ytd-live-chat-frame#chat,
+ytd-watch-flexy #chat-container,
+ytd-watch-metadata #teaser-carousel {
+  display: none !important;
+}
+
+/* ==========================================================================
+   (B6) Shorts: hide every Shorts section and entry point
+   ========================================================================== */
+
+/* Sidebar (full and mini guide). */
+ytd-guide-entry-renderer:has(> a[title="Shorts"]),
+ytd-guide-entry-renderer:has(> a[href="/shorts/"]),
+ytd-mini-guide-entry-renderer:has(> a[title="Shorts"]),
+ytd-mini-guide-entry-renderer:has(> a[href="/shorts/"]),
+
+/* Channel page "Shorts" tab. */
+yt-tab-shape[tab-title="Shorts"],
+tp-yt-paper-tab:has(> .tab-content[title="Shorts"]),
+
+/* Shelves (home, subscriptions, search, channel, watch sidebar). */
+ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+ytd-rich-shelf-renderer[is-shorts],
+ytd-reel-shelf-renderer,
+grid-shelf-view-model:has(ytm-shorts-lockup-view-model, ytm-shorts-lockup-view-model-v2, a[href^="/shorts/"]),
+ytd-item-section-renderer:has(> #contents > ytd-reel-shelf-renderer:only-child),
+ytd-browse[page-subtype="channels"] ytd-item-section-renderer:has(ytd-reel-shelf-renderer),
+ytd-browse[page-subtype="channels"] ytd-shelf-renderer:has(a[href^="/shorts/"]),
+
+/* Individual Shorts mixed into feeds, search results, and the watch sidebar. */
+ytd-rich-item-renderer:has(a[href^="/shorts/"]),
+ytd-rich-item-renderer:has(ytm-shorts-lockup-view-model, ytm-shorts-lockup-view-model-v2),
+ytd-video-renderer:has(a[href^="/shorts/"]),
+ytd-grid-video-renderer:has(a[href^="/shorts/"]),
+ytd-compact-video-renderer:has(a[href^="/shorts/"]),
+yt-lockup-view-model:has(a[href^="/shorts/"]),
+ytm-shorts-lockup-view-model,
+ytm-shorts-lockup-view-model-v2,
+
+/* "Shorts" filter chips (search, home, channel). */
+yt-chip-cloud-chip-renderer:has(yt-formatted-string[title="Shorts"]),
+chip-view-model:has(button[aria-label="Shorts"]),
+yt-chip-cloud-chip-renderer:has(chip-shape button[aria-label="Shorts"]) {
+  display: none !important;
+}
+
+/* ==========================================================================
+   No miniplayer or picture-in-picture (videos only play on their own page)
+   ========================================================================== */
+
+ytd-miniplayer,
+.html5-video-player .ytp-miniplayer-button,
+.html5-video-player .ytp-pip-button {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Video cards: hover buttons. The hover preview's top-right Mute and
+   Subtitles/CC buttons, plus the older "Watch later" / "Add to queue"
+   overlays. display: none also makes them unclickable and unfocusable.
+   ========================================================================== */
+
+yt-inline-player-controls .ytInlinePlayerControlsTopRightControls,
+yt-thumbnail-hover-overlay-toggle-actions-view-model,
+thumbnail-hover-overlay-toggle-actions-view-model,
+ytd-thumbnail #hover-overlays ytd-thumbnail-overlay-toggle-button-renderer,
+ytd-video-preview ytd-thumbnail-overlay-toggle-button-renderer,
+#video-preview ytd-thumbnail-overlay-toggle-button-renderer {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Channel pages: members-only content
+   ========================================================================== */
+
+ytd-browse[page-subtype="channels"] ytd-rich-item-renderer:has(badge-shape.ytBadgeShapeCommerce),
+ytd-browse[page-subtype="channels"] ytd-rich-item-renderer:has(.badge-style-type-members-only),
+ytd-browse[page-subtype="channels"] yt-lockup-view-model:has(badge-shape.ytBadgeShapeCommerce),
+ytd-browse[page-subtype="channels"] ytd-grid-video-renderer:has(.badge-style-type-members-only),
+ytd-browse[page-subtype="channels"] ytd-video-renderer:has(.badge-style-type-members-only) {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Sidebar: "Report history" (its section, and the "Explore" and "More from
+   YouTube" sections, are flagged by main.js by title)
+   ========================================================================== */
+
+ytd-guide-entry-renderer:has(> a[href="/reporthistory"]) {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Page: search-by-voice button and the filter chips above the related videos
+   ========================================================================== */
+
+ytd-masthead #voice-search-button,
+ytd-watch-flexy #secondary yt-related-chip-cloud-renderer {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Smaller thumbnails, more room for titles
+   ========================================================================== */
+
+/* Watch page, related videos: thumbnails at half width (YouTube's 234px). */
+ytd-watch-flexy #secondary yt-lockup-view-model .ytLockupViewModelHorizontal > .ytLockupViewModelContentImage {
+  width: 117px !important;
+  min-width: 0 !important;
+  flex: none !important;
+  align-self: center !important; /* Centered in rows with taller titles. */
+}
+ytd-watch-flexy #secondary yt-lockup-view-model .ytLockupViewModelContentImage > yt-thumbnail-view-model,
+/* Mixes and playlists use a stacked thumbnail that scales with its wrapper. */
+ytd-watch-flexy #secondary yt-lockup-view-model .ytLockupViewModelContentImage > yt-collection-thumbnail-view-model {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Homepage, subscriptions, and channel pages: each thumbnail is shorter
+   (52px narrower at 16:9 = about 29px shorter, centered), so three title
+   lines fit, with room for descenders (g, j, p, q, y). The title always
+   reserves three lines, so the channel and view-count lines line up across
+   cards. */
+ytd-browse:is([page-subtype="home"], [page-subtype="subscriptions"], [page-subtype="channels"]) ytd-rich-item-renderer:not([is-slim-media]) .ytLockupViewModelVertical > .ytLockupViewModelContentImage > yt-thumbnail-view-model {
+  width: calc(100% - 52px) !important;
+  height: auto !important;
+  padding-top: 0 !important;
+  aspect-ratio: 16 / 9 !important;
+  margin: 0 auto !important;
+}
+/* Mixes and playlists: the stacked thumbnail scales with its wrapper. */
+ytd-browse:is([page-subtype="home"], [page-subtype="subscriptions"], [page-subtype="channels"]) ytd-rich-item-renderer:not([is-slim-media]) .ytLockupViewModelVertical > .ytLockupViewModelContentImage > yt-collection-thumbnail-view-model {
+  width: calc(100% - 52px) !important;
+  margin: 0 auto !important;
+}
+ytd-browse:is([page-subtype="home"], [page-subtype="subscriptions"], [page-subtype="channels"]) ytd-rich-item-renderer:not([is-slim-media]) .ytLockupViewModelVertical .ytLockupMetadataViewModelTitle {
+  -webkit-line-clamp: 3 !important;
+  box-sizing: content-box !important;
+  height: 66px !important;
+  max-height: none !important;
+  padding-bottom: 3px !important;
+}
+
+/* The "New" badge in the top-left corner of thumbnails. */
+yt-thumbnail-overlay-badge-view-model.ytThumbnailOverlayBadgeViewModelTopStart:has(badge-shape.ytBadgeShapeThumbnailSpecial) {
+  display: none !important;
+}
+
+/* Channel pages: the banner area at the top of the header (blank space when
+   there is no banner, or when the banner image itself is blocked). */
+ytd-tabbed-page-header #page-header-banner {
+  display: none !important;
+}
+
+/* Speed and Quality menus: tighter rows and header, and room under the
+   speed buttons. */
+.ytp-settings-menu .ytp-panel-header {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+.ytp-settings-menu .ytp-panel-menu {
+  padding-top: 0 !important;
+  padding-bottom: 4px !important;
+}
+.ytp-settings-menu .ytp-panel-menu .ytp-menuitem {
+  height: 32px !important;
+}
+.ytp-settings-menu .ytp-variable-speed-panel-content {
+  padding-top: 10px !important;
+  padding-bottom: 0 !important;
+}
+.ytp-settings-menu .ytp-variable-speed-panel-chips {
+  padding-bottom: 10px !important;
+}
+
+/* Player: no hover tooltips on the controls ("Play", "Mute", "Full screen"...).
+   The scrubber's preview (also a .ytp-tooltip) stays. */
+.html5-video-player .ytp-tooltip:not(.ytp-preview) {
+  display: none !important;
+}
+
+/* Scrubber: no "Pull up for precise seeking" mode, hint, or pull indicator. */
+.html5-video-player .ytp-fine-scrubbing-container,
+.html5-video-player .ytp-scrubber-pull-indicator,
+.html5-video-player .ytp-tooltip-edu {
+  display: none !important;
+}
+
+/* Watch page: tickets, merch, and shopping shelves between the description
+   and the comments. */
+ytd-watch-flexy #ticket-shelf,
+ytd-watch-flexy #merch-shelf,
+ytd-watch-flexy #shopping-timely-shelf,
+ytd-watch-flexy ytd-ticket-shelf-renderer,
+ytd-watch-flexy ytd-merch-shelf-renderer,
+ytd-watch-flexy ytd-product-list-renderer,
+ytd-watch-flexy yt-shopping-shelf-view-model {
+  display: none !important;
+}

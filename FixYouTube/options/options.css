@@ -1,0 +1,95 @@
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --fg: #0f0f0f;
+  --muted: #606060;
+  --line: #e5e5e5;
+  font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #181818;
+    --fg: #f1f1f1;
+    --muted: #aaaaaa;
+    --line: #303030;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  min-width: 432px;
+}
+
+main {
+  max-width: 624px;
+  margin: 0 auto;
+  padding: 16px 18px 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.row:last-of-type {
+  border-bottom: none;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+}
+
+label {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.text p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+select {
+  /* Native system control; only spacing is set. */
+  margin-top: 8px;
+}
+
+/* Native system checkbox, scaled up slightly (zoom keeps its native look). */
+input[type="checkbox"] {
+  flex: none;
+  margin: 2px 0 0;
+  zoom: 1.25;
+}
+
+/* Shown beside the title so it takes no space below the last setting. */
+#status {
+  margin: 0 0 0 auto;
+  color: var(--muted);
+  font-size: 12px;
+}
